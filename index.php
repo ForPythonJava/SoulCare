@@ -68,18 +68,15 @@
                     <div class="main-menu__wrapper clearfix">
                         <div class="container">
                             <div class="main-header-one__bottom-inner">
-
                                 <div class="main-header-one__bottom-left">
                                     <div class="logo-one">
                                         <a href="index.html">
                                             <h2>SOUL<span id="h2">CARE</span></h2>
                                         </a>
                                     </div>
-
                                     <div class="main-menu__main-menu-box">
                                         <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                         <ul class="main-menu__list">
-
                                             <li>
                                                 <a href="index.php">Home </a>
                                             </li>
@@ -95,8 +92,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
-
                                 <div class="main-header-one__bottom-right">
                                     <div class="main-header__bottom-contact-box">
                                         <div class="icon-box">
@@ -107,7 +102,6 @@
                                             <h5><a href="tel:880011524466">(88) 00-11-52 -44 66</a></h5>
                                         </div>
                                     </div>
-
                                     <div class="main-header-one__bottom-right-btn">
                                         <a href="#" class="thm-btn">Request Book</a>
                                     </div>
@@ -115,7 +109,6 @@
                                     <div class="main-header__search">
                                         <a href="#" class="main-menu__search search-toggler icon-search"></a>
                                     </div> -->
-
                                 </div>
                             </div>
                         </div>
