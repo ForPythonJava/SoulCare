@@ -87,10 +87,10 @@
                                                 <a href="./COMMON/login.php">Login</a>
                                             </li>
                                             <li>
-                                                <a href="staffReg.php">Staff</a>
+                                                <a href="./COMMON/staffReg.php">Staff</a>
                                             </li>
                                             <li>
-                                                <a href="studReg.php">Student</a>
+                                                <a href="./COMMON/studReg.php">Student</a>
                                             </li>
                                         </ul>
                                     </div>
