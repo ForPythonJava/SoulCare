@@ -31,7 +31,8 @@ include "../DBConnection/dbconnection.php";
 <!--End Page Header-->
 
 <?php
-$qry = "SELECT `student`.*,`booking`.* from student,booking,councellor,programme where student.sid=booking.sid and councellor.cid=programme.cid and councellor.cid='$uid'";
+$qry = "SELECT `student`.*,`booking`.* FROM student,booking,councellor,programme WHERE student.sid=booking.sid AND councellor.cid=programme.cid AND councellor.cid='1' AND `programme`.`pid`=`booking`.`pid`";
+// echo $qry;
 $result = mysqli_query($conn, $qry);
 if (mysqli_num_rows($result) < 1) {
 ?>

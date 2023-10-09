@@ -47,7 +47,7 @@ include "../DBConnection/dbconnection.php";
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date" name="date" id="select" required>
+                                <input type="text" oninput="validateDate(this)" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date" name="date" id="select" required>
                             </div>
                         </div>
                     </div>
@@ -232,6 +232,18 @@ if (mysqli_num_rows($result) < 1) {
     });
 </script>
 
+<script>
+    function validateDate(input) {
+        var currentDate = new Date();
+        var selectedDate = new Date(input.value);
+
+        if (selectedDate < currentDate) {
+            input.setCustomValidity("Selected date cannot be in the past.");
+        } else {
+            input.setCustomValidity("");
+        }
+    }
+</script>
 
 <?php
 include "../COMMON/commonFooter.php";
