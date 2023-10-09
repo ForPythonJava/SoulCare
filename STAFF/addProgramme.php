@@ -4,6 +4,7 @@ $uid = $_SESSION['uid'];
 include "staffHeader.php";
 include "../DBConnection/dbconnection.php";
 ?>
+
 <style>
     #table {
         font-family: arial, sans-serif;
@@ -34,21 +35,19 @@ include "../DBConnection/dbconnection.php";
     <div class="container">
 
         <div class="contact-page__bottom">
-            <div class="contact-page__bottom-pattern"
-                style="background-image: url(../assets/images/pattern/contact-pattern.jpg);">
+            <div class="contact-page__bottom-pattern" style="background-image: url(../assets/images/pattern/contact-pattern.jpg);">
             </div>
             <div class="contact-page__bottom-inner">
-                <form class="contact-page__form" method="post">
+                <form class="contact-page__form" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" placeholder="Name of Event" name="name" required>
+                                <input type="text" placeholder="Name Of Event" name="name" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')"
-                                    onblur="(this.type='text')" placeholder="Date" name="date" id="select" required>
+                                <input type="text" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date" name="date" id="select" required>
                             </div>
                         </div>
                     </div>
@@ -66,9 +65,9 @@ include "../DBConnection/dbconnection.php";
                                     $qry = "SELECT * FROM `councellor`";
                                     $result = mysqli_query($conn, $qry);
                                     while ($row = mysqli_fetch_array($result)) {
-                                        ?>
+                                    ?>
                                         <option value="<?php echo $row['cid']; ?>"><?php echo $row['name']; ?></option>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </select>
@@ -117,15 +116,18 @@ if (isset($_REQUEST['addProgramme'])) {
     $Description = $_REQUEST['desc'];
     $Phone = $_REQUEST['phone'];
 
-    $qryCheck = "SELECT COUNT(*) AS cnt FROM `programme` WHERE `name`='$Name'";
+    // Check if the program name already exists
+    $qryCheck = "SELECT COUNT(*) AS cnt FROM `programme` WHERE `programme_name`='$Name'";
     $qryOut = mysqli_query($conn, $qryCheck);
     $fetchData = mysqli_fetch_array($qryOut);
 
     if ($fetchData['cnt'] > 0) {
         echo "<script>alert('Programme Already Added');</script>";
     } else {
+        // Insert the new program
         $qryReg = "INSERT INTO `programme`(`cid`,`sid`,`programme_name`,`description`,`date`,`time`,`location`,`phone`)VALUES('$Councellor','$uid','$Name','$Description','$Date','$Time','$Location','$Phone')";
-        if ($conn->query($qryReg) == TRUE) {
+
+        if ($conn->query($qryReg) === TRUE) {
             echo "<script>alert('Programme Added');window.location='addProgramme.php';</script>";
         } else {
             echo "<script>alert('Failed');</script>";
@@ -133,7 +135,6 @@ if (isset($_REQUEST['addProgramme'])) {
         }
     }
 }
-
 ?>
 
 <?php
@@ -141,13 +142,13 @@ $qry = "SELECT `programme`.*,`councellor`.`name` FROM `programme`,`councellor` W
 // echo $qry;
 $result = mysqli_query($conn, $qry);
 if (mysqli_num_rows($result) < 1) {
-    ?>
+?>
     <center>
         <h1 id="nodata" class="m-3">No Programme Added</h1>
     </center>
-    <?php
+<?php
 } else {
-    ?>
+?>
     <center>
         <h1 class="m-3 bread">Programs</h1>
         <input type="text" class="form-control m-3" id="searchInput" style="width: 95%;" placeholder="Search...">
@@ -166,7 +167,7 @@ if (mysqli_num_rows($result) < 1) {
             <tbody id="tableBody">
                 <?php
                 while ($row = mysqli_fetch_array($result)) {
-                    ?>
+                ?>
                     <tr id="row{{ forloop.counter }}" style="text-align: center;">
                         <td>
                             <?php echo $row['programme_name'] ?>
@@ -193,7 +194,7 @@ if (mysqli_num_rows($result) < 1) {
                             <a href="deleteProgramme.php?id=<?php echo $row['pid'] ?>" class="btn btn-outline-danger">Delete</a>
                         </td>
                     </tr>
-                    <?php
+                <?php
                 }
                 ?>
             </tbody>
@@ -209,12 +210,12 @@ if (mysqli_num_rows($result) < 1) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Handle search input
-        $("#searchInput").on("keyup", function () {
+        $("#searchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             var rows = $("#tableBody tr");
-            var matchingRows = rows.filter(function () {
+            var matchingRows = rows.filter(function() {
                 var rowText = $(this).text().toLowerCase();
                 return rowText.indexOf(value) > -1;
             });
@@ -230,7 +231,6 @@ if (mysqli_num_rows($result) < 1) {
         });
     });
 </script>
-
 
 
 <?php

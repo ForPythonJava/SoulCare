@@ -42,31 +42,26 @@ $name = $row['name'];
 <section class="contact-page">
     <div class="container">
         <div class="contact-page__bottom">
-            <div class="contact-page__bottom-pattern"
-                style="background-image: url(../assets/images/pattern/contact-pattern.jpg);">
+            <div class="contact-page__bottom-pattern" style="background-image: url(../assets/images/pattern/contact-pattern.jpg);">
             </div>
             <div class="contact-page__bottom-inner">
                 <form class="contact-page__form" method="post">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" placeholder="Name of Event" name="name"
-                                    value="<?php echo $row['programme_name'] ?>" required>
+                                <input type="text" placeholder="Name of Event" name="name" value="<?php echo $row['programme_name'] ?>" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')"
-                                    onblur="(this.type='text')" placeholder="Date" name="date" id="select"
-                                    value="<?php echo $row['date'] ?>" required>
+                                <input type="text" min="<?php echo date('Y-m-d') ?>" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date" name="date" id="select" value="<?php echo $row['date'] ?>" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" placeholder="Time" value="<?php echo $row['time'] ?>" name="time"
-                                    id="select" required>
+                                <input type="text" placeholder="Time" value="<?php echo $row[6] ?>" name="time" id="select" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -77,9 +72,9 @@ $name = $row['name'];
                                     $qry = "SELECT * FROM `councellor` WHERE `name` !='$name'";
                                     $result = mysqli_query($conn, $qry);
                                     while ($row1 = mysqli_fetch_array($result)) {
-                                        ?>
+                                    ?>
                                         <option value="<?php echo $row1['cid']; ?>"><?php echo $row1['name']; ?></option>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </select>
@@ -89,22 +84,19 @@ $name = $row['name'];
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" placeholder="Location" value="<?php echo $row['location'] ?>"
-                                    name="location" required>
+                                <input type="text" placeholder="Location" value="<?php echo $row['location'] ?>" name="location" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="contact-page__input-box">
-                                <input type="text" placeholder="Contact Number" value="<?php echo $row['phone'] ?>"
-                                    name="phone" required>
+                                <input type="text" placeholder="Contact Number" value="<?php echo $row['phone'] ?>" name="phone" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                             <div class="contact-page__input-box">
-                                <textarea name="desc" placeholder="Description"
-                                    required><?php echo $row['description'] ?></textarea>
+                                <textarea name="desc" placeholder="Description" required><?php echo $row['description'] ?></textarea>
                             </div>
                             <div class="contact-page__btn">
                                 <button type="submit" name="updateProgram">
