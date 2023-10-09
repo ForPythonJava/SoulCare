@@ -35,7 +35,7 @@ include "../DBConnection/dbconnection.php";
 <!--End Page Header-->
 
 <?php
-$qry = "SELECT `feedback`.*,`student`.`name`,`programme`.`programme_name` FROM `feedback`,`student`,`staff`,`programme`,`booking` WHERE `feedback`.`uid`=`student`.`sid` AND `booking`.`pid`=`programme`.`pid` AND `booking`.`sid`=`student`.`sid`";
+$qry = "SELECT `feedback`.*,`student`.`name`,`programme`.`programme_name` FROM `feedback`,`student`,`programme`,`booking` WHERE `feedback`.`uid`=`student`.`sid` AND `booking`.`pid`=`programme`.`pid` AND `booking`.`sid`=`student`.`sid`";
 // echo $qry;
 $result = mysqli_query($conn, $qry);
 if (mysqli_num_rows($result) < 1) {

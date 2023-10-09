@@ -32,17 +32,22 @@ include "../DBConnection/dbconnection.php";
 <!--End Page Header-->
 
 <?php
-$qry = "SELECT `feedback`.*,`student`.`name`,`programme`.`programme_name` FROM `feedback`,`student`,`programme`,`staff`,`booking` WHERE `feedback`.`booking_id`=`booking`.`booking_id` AND `booking`.`pid`=`programme`.`pid` AND `booking`.`sid`=`student`.`sid` AND `programme`.`cid`='$uid'";
+$qry = "SELECT DISTINCT `feedback`.*, `student`.`name`, `programme`.`programme_name`
+FROM `feedback`
+JOIN `booking` ON `feedback`.`booking_id` = `booking`.`booking_id`
+JOIN `programme` ON `booking`.`pid` = `programme`.`pid`
+JOIN `student` ON `booking`.`sid` = `student`.`sid`
+WHERE `programme`.`cid` = '$uid'";
 // echo $qry;
 $result = mysqli_query($conn, $qry);
 if (mysqli_num_rows($result) < 1) {
-    ?>
+?>
     <center>
         <h1 id="nodata" class="m-3">No Feedbacks Yet</h1>
     </center>
-    <?php
+<?php
 } else {
-    ?>
+?>
     <center>
         <h1 class="m-3 bread">Feedbacks</h1>
         <input type="text" class="form-control m-3" id="searchInput" style="width: 80%;" placeholder="Search...">
@@ -59,7 +64,7 @@ if (mysqli_num_rows($result) < 1) {
             <tbody id="tableBody">
                 <?php
                 while ($row = mysqli_fetch_array($result)) {
-                    ?>
+                ?>
                     <tr id="row{{ forloop.counter }}" style="text-align: center;">
                         <td>
                             <?php echo $row['name'] ?>
@@ -77,7 +82,7 @@ if (mysqli_num_rows($result) < 1) {
                             <?php echo $row['date'] ?>
                         </td>
                     </tr>
-                    <?php
+                <?php
                 }
                 ?>
             </tbody>
@@ -93,12 +98,12 @@ if (mysqli_num_rows($result) < 1) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Handle search input
-        $("#searchInput").on("keyup", function () {
+        $("#searchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             var rows = $("#tableBody tr");
-            var matchingRows = rows.filter(function () {
+            var matchingRows = rows.filter(function() {
                 var rowText = $(this).text().toLowerCase();
                 return rowText.indexOf(value) > -1;
             });
